@@ -13,6 +13,7 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html"><img src="logo.jpg" alt="MrTeluguMan logo"><span class="name">MrTeluguMan</span></a>
+      <form class="header-search" action="search.html" role="search"><input type="search" name="q" placeholder="Search stories, places, topics..." aria-label="Search"></form>
     <div class="nav-right">
       <nav class="nav-links">
         <a href="index.html">Home</a>
@@ -49,10 +50,13 @@
 <div class="search-empty" id="results">Search will list matching stories here once articles are published.</div>
 <script>
   var q=document.getElementById('q');
-  q && q.addEventListener('input',function(){
-    var v=q.value.trim();
-    document.getElementById('results').textContent = v ? 'No stories yet for "'+v+'". Articles are coming soon.' : 'Search will list matching stories here once articles are published.';
-  });
+  var res=document.getElementById('results');
+  function show(v){res.textContent = v ? 'No stories yet for "'+v+'". Articles are coming soon.' : 'Search will list matching stories here once articles are published.';}
+  q && q.addEventListener('input',function(){show(q.value.trim());});
+  // pick up ?q= passed from the header search bar
+  var params=new URLSearchParams(window.location.search);
+  var incoming=params.get('q');
+  if(incoming){q.value=incoming;show(incoming.trim());}
 </script>
 <footer>
   <div class="footer-links"><a href="about.html">About</a><a href="mission.html">Mission &amp; Vision</a><a href="contact.html">Contact</a><a href="tip.html">Submit a tip</a></div>
