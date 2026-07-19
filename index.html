@@ -3,99 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MrTeluguMan</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
-
-body { font-family: 'Inter', sans-serif; background:#ffffff; color:#000; }
-h1,h2 { font-family:'Playfair Display', serif; }
-
-.red-line { border-left:4px solid #e11d48; padding-left:16px; transition:0.3s; }
-.red-line:hover { border-left:6px solid #e11d48; }
-</style>
+<title>MrTeluguMan — Truth they don't want you to know</title>
+<meta name="description" content="An independent people's movement exposing injustice across Andhra Pradesh and Telangana.">
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<!-- NAV -->
-<nav class="bg-black text-white px-6 py-4 flex justify-between items-center">
-  <div class="flex items-center gap-4">
-    <img src="logo.jpg" class="w-12 h-12 rounded-full bg-white">
-    <h1 class="text-2xl font-bold">MrTeluguMan</h1>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><img src="logo.jpg" alt="MrTeluguMan logo"><span class="name">MrTeluguMan</span></a>
+      <form class="header-search" action="search.html" role="search"><input type="search" name="q" placeholder="Search stories, places, topics..." aria-label="Search"></form>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="andhra-pradesh.html">Andhra Pradesh</a>
+        <a href="telangana.html">Telangana</a>
+        <a href="latest.html">Latest</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Mission</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="icon-btn" href="search.html" aria-label="Search">&#9906;</a>
+      <button class="icon-btn menu-btn" aria-label="Menu">&#9776;</button>
+    </div>
   </div>
-
-  <input id="search" placeholder="Search..." class="hidden md:block px-3 py-1 text-black rounded">
-</nav>
-
-<!-- HERO -->
-<header class="text-center py-16 bg-black text-white">
-  <h1 class="text-2xl md:text-4xl leading-tight px-4">Truth They Don't Want You To Know</h1>
-  <p class="mt-4 text-gray-400">Independent journalism for Telugu people</p>
 </header>
 
-<!-- CONTENT -->
-<main class="max-w-6xl mx-auto px-6 py-16">
-
-<div class="grid grid-cols-2 gap-6 md:gap-16">
-
-<!-- ANDHRA PRADESH -->
-<section>
-  <h2 class="text-2xl md:text-3xl font-bold mb-6">Andhra Pradesh</h2>
-
-  <div class="red-line">
-    <p class="text-gray-600">Coming soon.</p>
-    <div class="mt-4 w-full h-48 md:h-56 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-      Content Coming Soon
-    </div>
+<div class="drawer" id="drawer">
+  <div class="drawer-bg"></div>
+  <div class="drawer-panel">
+    <div class="drawer-head"><span class="name">MrTeluguMan</span><button class="icon-btn drawer-close" aria-label="Close">&times;</button></div>
+    <a href="index.html">Home</a>
+    <a href="latest.html">Latest stories</a>
+    <a href="andhra-pradesh.html">Andhra Pradesh</a>
+    <a href="telangana.html">Telangana</a>
+    <a href="about.html">About</a>
+    <a href="mission.html">Mission &amp; Vision</a>
+    <a href="contact.html">Contact</a>
+    <a href="tip.html">Submit a tip</a>
+    <a href="search.html">Search</a>
+    <div class="social"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#">X</a><a href="#">Linktree</a></div>
   </div>
-
-</section>
-
-<!-- TELANGANA -->
-<section>
-  <h2 class="text-2xl md:text-3xl font-bold mb-6">Telangana</h2>
-
-  <div class="red-line">
-    <p class="text-gray-600">Coming soon.</p>
-    <div class="mt-4 w-full h-48 md:h-56 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-      Content Coming Soon
-    </div>
-  </div>
-
-</section>
-
 </div>
 
-</main>
+<section class="hero"><h1>Truth they don't want you to know</h1></section>
 
-<!-- FOOTER -->
-<footer class="bg-black text-white py-10">
-  <div class="max-w-5xl mx-auto text-center space-y-6">
+<div class="chips" id="chips">
+  <button class="chip active" data-filter="all">Latest</button>
+  <button class="chip" data-filter="ap">Andhra Pradesh</button>
+  <button class="chip" data-filter="tg">Telangana</button>
+</div>
 
-    <div class="flex justify-center gap-6 text-sm font-medium flex-wrap">
-      <a href="https://youtube.com/@mrteluguman" target="_blank" class="hover:underline">YouTube</a>
-      <a href="https://instagram.com/mrteluguman" target="_blank" class="hover:underline">Instagram</a>
-      <a href="https://x.com/mrteluguman" target="_blank" class="hover:underline">X</a>
-      <a href="https://linktr.ee/mrteluguman" target="_blank" class="hover:underline">Linktree</a>
-    </div>
-
-    <p class="text-xs text-gray-400">© 2026 MrTeluguMan</p>
-
+<section class="latest">
+  <div class="sec-head"><span class="sec-bar"></span><span class="sec-title">Latest stories</span></div>
+  <div class="row">
+    <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#3a1114,#511a1f)"><span class="play-badge" aria-hidden="true">&#9654;</span><span class="soon">Coming soon</span></div><div class="card-body"><h3>Video story coming soon</h3></div></a>
+    <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#1b1b2e,#26263f)"><span class="soon">Coming soon</span></div><div class="card-body"><h3>Story coming soon</h3></div></a>
+    <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#12261f,#1b3a2e)"><span class="soon">Coming soon</span></div><div class="card-body"><h3>Story coming soon</h3></div></a>
+    <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#241a2a,#332338)"><span class="soon">Coming soon</span></div><div class="card-body"><h3>Story coming soon</h3></div></a>
   </div>
+</section>
+
+<div class="split" id="split">
+  <div class="col ap">
+    <div class="sec-head"><span class="sec-bar"></span><span class="sec-title">Andhra Pradesh</span></div>
+    <div class="stack">
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#2a1416,#3a1d1f)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Andhra Pradesh</div><h3>Story coming soon</h3></div></a>
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#14202a,#1d2e3a)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Andhra Pradesh</div><h3>Story coming soon</h3></div></a>
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#1a2418,#26331f)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Andhra Pradesh</div><h3>Story coming soon</h3></div></a>
+    </div>
+    <a class="state-btn" href="andhra-pradesh.html">See all Andhra Pradesh stories <span class="arrow">&rarr;</span></a>
+  </div>
+  <div class="col tg">
+    <div class="sec-head"><span class="sec-bar"></span><span class="sec-title">Telangana</span></div>
+    <div class="stack">
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#241a2a,#332338)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Telangana</div><h3>Story coming soon</h3></div></a>
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#2a2410,#3a3218)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Telangana</div><h3>Story coming soon</h3></div></a>
+      <a class="card" href="story.html"><div class="thumb" style="background:linear-gradient(135deg,#101f1c,#173029)"><span class="soon">Coming soon</span></div><div class="card-body"><div class="kicker">Telangana</div><h3>Story coming soon</h3></div></a>
+    </div>
+    <a class="state-btn" href="telangana.html">See all Telangana stories <span class="arrow">&rarr;</span></a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links"><a href="about.html">About</a><a href="mission.html">Mission &amp; Vision</a><a href="contact.html">Contact</a><a href="tip.html">Submit a tip</a></div>
+  <div class="social"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#">X</a><a href="#">Linktree</a></div>
+  <div class="copy">© 2026 MrTeluguMan · An independent people's movement</div>
 </footer>
 
-<script>
-const search = document.getElementById('search');
-search.addEventListener('keyup', function() {
-  let value = this.value.toLowerCase();
-  document.querySelectorAll('.red-line').forEach(el => {
-    el.style.display = el.innerText.toLowerCase().includes(value) ? 'block' : 'none';
-  });
-});
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>

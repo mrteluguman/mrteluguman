@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Contact — MrTeluguMan</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><img src="logo.jpg" alt="MrTeluguMan logo"><span class="name">MrTeluguMan</span></a>
+      <form class="header-search" action="search.html" role="search"><input type="search" name="q" placeholder="Search stories, places, topics..." aria-label="Search"></form>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="andhra-pradesh.html">Andhra Pradesh</a>
+        <a href="telangana.html">Telangana</a>
+        <a href="latest.html">Latest</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Mission</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="icon-btn" href="search.html" aria-label="Search">&#9906;</a>
+      <button class="icon-btn menu-btn" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <div class="drawer-bg"></div>
+  <div class="drawer-panel">
+    <div class="drawer-head"><span class="name">MrTeluguMan</span><button class="icon-btn drawer-close" aria-label="Close">&times;</button></div>
+    <a href="index.html">Home</a>
+    <a href="latest.html">Latest stories</a>
+    <a href="andhra-pradesh.html">Andhra Pradesh</a>
+    <a href="telangana.html">Telangana</a>
+    <a href="about.html">About</a>
+    <a href="mission.html">Mission &amp; Vision</a>
+    <a href="contact.html">Contact</a>
+    <a href="tip.html">Submit a tip</a>
+    <a href="search.html">Search</a>
+    <div class="social"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#">X</a><a href="#">Linktree</a></div>
+  </div>
+</div>
+<div class="page-hero"><div class="wrap"><span class="bar"></span><div><h1>Contact</h1><p>Reach the team.</p></div></div></div>
+<form class="form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='Message sent';">
+  <div class="field"><label>Your name</label><input type="text" placeholder="Full name" required></div>
+  <div class="field"><label>Email or phone</label><input type="text" placeholder="How we reach you" required></div>
+  <div class="field"><label>Message</label><textarea placeholder="Write your message..." required></textarea></div>
+  <button class="submit" type="submit">Send message</button>
+  <p class="note">You can also reach us on YouTube, Instagram, X, and Linktree. This form is a placeholder — it will connect to your inbox once set up.</p>
+</form>
+<footer>
+  <div class="footer-links"><a href="about.html">About</a><a href="mission.html">Mission &amp; Vision</a><a href="contact.html">Contact</a><a href="tip.html">Submit a tip</a></div>
+  <div class="social"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#">X</a><a href="#">Linktree</a></div>
+  <div class="copy">© 2026 MrTeluguMan · An independent people's movement</div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
