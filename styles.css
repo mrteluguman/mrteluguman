@@ -29,7 +29,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(12,12,13,.85);backdrop-f
 .brand img{width:38px;height:38px;border-radius:50%;background:#fff;object-fit:cover}
 .brand .name{color:var(--red);font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:.3px}
 .nav-right{display:flex;align-items:center;gap:20px}
-.nav-links{display:flex;gap:20px}
+.nav-links{display:none}
 .nav-links a{color:var(--text-2);font-size:14px}
 .nav-links a:hover,.nav-links a.active{color:var(--text)}
 .icon-btn{background:none;border:none;color:var(--text-2);font-size:18px;cursor:pointer;line-height:1}
