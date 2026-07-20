@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Latest stories",
+    "url": "latest.html",
+    "category": "Latest",
+    "date": "2026-07-19",
+    "keywords": "latest new recent breaking news updates stories today headlines",
+    "snippet": "The newest stories across Andhra Pradesh, Telangana and All India."
+  },
+  {
+    "title": "Andhra Pradesh stories",
+    "url": "andhra-pradesh.html",
+    "category": "Andhra Pradesh",
+    "date": "2026-07-18",
+    "keywords": "andhra pradesh ap amaravati vijayawada visakhapatnam vizag guntur tirupati nellore kurnool kadapa rajahmundry rayalaseema tdp ycp jagan chandrababu naidu state politics",
+    "snippet": "Investigations and reports from across Andhra Pradesh."
+  },
+  {
+    "title": "Telangana stories",
+    "url": "telangana.html",
+    "category": "Telangana",
+    "date": "2026-07-17",
+    "keywords": "telangana ts hyderabad warangal karimnagar nizamabad khammam nalgonda brs kcr revanth reddy congress state politics",
+    "snippet": "Investigations and reports from across Telangana."
+  },
+  {
+    "title": "All India",
+    "url": "all-india.html",
+    "category": "All India",
+    "date": "2026-07-16",
+    "keywords": "all india national bharat country delhi central government india nationwide politics",
+    "snippet": "National stories from across India."
+  },
+  {
+    "title": "Contact & Submit a tip",
+    "url": "contact.html",
+    "category": "Page",
+    "date": "2026-07-05",
+    "keywords": "contact reach us email message tip submit whistleblower leak information source suggestion feedback report",
+    "snippet": "Reach us or send a confidential tip or suggestion."
+  },
+  {
+    "title": "Mission & Vision",
+    "url": "mission.html",
+    "category": "Page",
+    "date": "2026-07-02",
+    "keywords": "mission vision goal purpose values truth justice accountability people movement",
+    "snippet": "Our mission, vision and the values behind MrTeluguMan."
+  },
+  {
+    "title": "About Us",
+    "url": "about.html",
+    "category": "Page",
+    "date": "2026-07-01",
+    "keywords": "about us who we are mrteluguman independent people movement identity story team",
+    "snippet": "Who we are and what this movement stands for."
+  },
+  {
+    "title": "Home",
+    "url": "index.html",
+    "category": "Page",
+    "date": "2026-06-01",
+    "keywords": "home mrteluguman truth homepage",
+    "snippet": "MrTeluguMan home page."
+  }
+]

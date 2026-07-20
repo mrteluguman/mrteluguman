@@ -73,3 +73,155 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
 });
+
+/* ===== MrTeluguMan — live search (Netflix / Google style) ===== */
+(function(){
+  var INDEX=null, LOAD=null;
+  function loadIndex(){
+    if(LOAD) return LOAD;
+    LOAD=fetch('search-index.json',{cache:'no-cache'})
+      .then(function(r){return r.ok?r.json():[];})
+      .then(function(d){INDEX=Array.isArray(d)?d:(d.items||[]); return INDEX;})
+      .catch(function(){INDEX=[]; return INDEX;});
+    return LOAD;
+  }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function byDateDesc(a,b){return String(b.date||'').localeCompare(String(a.date||''));}
+  function fmtDate(d){
+    if(!d) return '';
+    var p=String(d).split('-'); if(p.length!==3) return d;
+    var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1]||'';
+    return m+' '+parseInt(p[2],10)+', '+p[0];
+  }
+  function score(it,terms){
+    var title=(it.title||'').toLowerCase();
+    var kw=(it.keywords||'').toLowerCase();
+    var cat=(it.category||'').toLowerCase();
+    var hay=title+' '+kw+' '+cat+' '+(it.snippet||'').toLowerCase();
+    var s=0;
+    for(var i=0;i<terms.length;i++){
+      var t=terms[i];
+      if(hay.indexOf(t)===-1) return -1;          // every word must match
+      if(title.indexOf(t)===0) s+=6;
+      else if(title.indexOf(t)!==-1) s+=4;
+      if(kw.indexOf(t)!==-1) s+=3;
+      if(cat.indexOf(t)!==-1) s+=2;
+      s+=1;
+    }
+    return s;
+  }
+  function search(q){
+    var terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+    var items=INDEX||[];
+    if(!terms.length) return [];
+    var out=[];
+    for(var i=0;i<items.length;i++){
+      var sc=score(items[i],terms);
+      if(sc>=0) out.push({it:items[i],s:sc});
+    }
+    out.sort(function(a,b){ return b.s!==a.s ? b.s-a.s : byDateDesc(a.it,b.it); }); // relevance, then most recent
+    return out.map(function(x){return x.it;});
+  }
+  function recent(n){ return (INDEX||[]).slice().sort(byDateDesc).slice(0,n||6); }
+
+  var MAG='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7"></circle><line x1="20.5" y1="20.5" x2="15.6" y2="15.6"></line></svg>';
+
+  /* ---------- Header overlay ---------- */
+  function buildOverlay(){
+    var o=document.createElement('div');
+    o.className='search-overlay'; o.id='searchOverlay';
+    o.innerHTML=''
+      +'<div class="so-bg"></div>'
+      +'<div class="so-panel">'
+      +  '<div class="so-inputwrap">'+MAG
+      +    '<input class="so-input" id="soInput" type="search" placeholder="Search stories, topics, places…" autocomplete="off">'
+      +    '<button class="so-close" aria-label="Close">&times;</button>'
+      +  '</div>'
+      +  '<div class="so-results" id="soResults"></div>'
+      +'</div>';
+    document.body.appendChild(o);
+    return o;
+  }
+  function itemRow(it){
+    return '<a class="so-item" href="'+esc(it.url)+'">'
+      + '<span class="so-ic">'+MAG.replace('width="22" height="22"','width="16" height="16"')+'</span>'
+      + '<span class="so-tx"><span class="so-ttl">'+esc(it.title)+'</span>'
+      + '<span class="so-meta"><span class="so-cat">'+esc(it.category||'')+'</span>'
+      + (it.date?' · '+esc(fmtDate(it.date)):'')+'</span></span></a>';
+  }
+  function renderOverlay(res,q){
+    var box=document.getElementById('soResults');
+    if(!box) return;
+    if(!q){
+      var r=recent(6);
+      box.innerHTML='<div class="so-lbl">Recent</div>'+r.map(itemRow).join('');
+      return;
+    }
+    if(!res.length){ box.innerHTML='<div class="so-hint">No matches for “'+esc(q)+'” yet.</div>'; return; }
+    box.innerHTML='<div class="so-lbl">Results</div>'+res.map(itemRow).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    loadIndex();
+    var toggle=document.getElementById('searchToggle');
+    var overlay=buildOverlay();
+    var input=document.getElementById('soInput');
+    var closeBtn=overlay.querySelector('.so-close');
+    var bg=overlay.querySelector('.so-bg');
+
+    function open(){ overlay.classList.add('open'); loadIndex().then(function(){ renderOverlay([], input.value.trim()); }); setTimeout(function(){input.focus();},60); }
+    function close(){ overlay.classList.remove('open'); }
+
+    if(toggle){ toggle.addEventListener('click',function(e){ e.preventDefault(); open(); }); }
+    if(closeBtn) closeBtn.addEventListener('click',close);
+    if(bg) bg.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+
+    if(input){
+      input.addEventListener('input',function(){
+        var q=input.value.trim();
+        loadIndex().then(function(){ renderOverlay(search(q),q); });
+      });
+      input.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){
+          var q=input.value.trim(); if(!q) return;
+          var first=overlay.querySelector('.so-results .so-item');
+          if(first){ window.location.href=first.getAttribute('href'); }
+          else { window.location.href='search.html?q='+encodeURIComponent(q); }
+        }
+      });
+    }
+
+    /* ---------- Full results page (search.html) ---------- */
+    var pageInput=document.getElementById('q');
+    var pageOut=document.getElementById('searchResults');
+    if(pageInput && pageOut){
+      function card(it){
+        return '<a class="sr-item" href="'+esc(it.url)+'">'
+          +'<span class="sr-ic">'+MAG.replace('width="22" height="22"','width="20" height="20"')+'</span>'
+          +'<span class="sr-tx"><span class="sr-cat">'+esc(it.category||'')+'</span>'
+          +'<div class="sr-ttl">'+esc(it.title)+'</div>'
+          +'<div class="sr-snip">'+esc(it.snippet||'')+'</div>'
+          +(it.date?'<div class="sr-date">'+esc(fmtDate(it.date))+'</div>':'')
+          +'</span></a>';
+      }
+      function renderPage(q){
+        if(!q){
+          var r=recent(8);
+          pageOut.innerHTML='<p class="sr-count">Recent</p><div class="sr-list">'+r.map(card).join('')+'</div>';
+          return;
+        }
+        var res=search(q);
+        if(!res.length){ pageOut.innerHTML='<p class="sr-count">No matches for “'+esc(q)+'”. Try a place, topic or section name.</p>'; return; }
+        pageOut.innerHTML='<p class="sr-count">'+res.length+' result'+(res.length>1?'s':'')+' for “'+esc(q)+'”</p><div class="sr-list">'+res.map(card).join('')+'</div>';
+      }
+      pageInput.addEventListener('input',function(){ loadIndex().then(function(){ renderPage(pageInput.value.trim()); }); });
+      var params=new URLSearchParams(window.location.search);
+      var incoming=params.get('q');
+      loadIndex().then(function(){
+        if(incoming){ pageInput.value=incoming; }
+        renderPage((incoming||'').trim());
+      });
+    }
+  });
+})();
