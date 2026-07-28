@@ -249,3 +249,8 @@ footer{border-top:.5px solid var(--border-soft);margin-top:20px;padding:26px 20p
 .sr-ttl{font-family:var(--serif);font-size:18px;font-weight:500;margin:2px 0 3px}
 .sr-snip{color:var(--text-2);font-size:14px;line-height:1.5}
 .sr-date{color:var(--text-3);font-size:12px;margin-top:4px}
+
+/* Social icon logos */
+.social a{display:inline-flex;align-items:center;line-height:0}
+.social a svg{display:block}
+.social{gap:24px}
