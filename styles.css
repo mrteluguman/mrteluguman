@@ -253,4 +253,4 @@ footer{border-top:.5px solid var(--border-soft);margin-top:20px;padding:26px 20p
 /* Social icon logos */
 .social a{display:inline-flex;align-items:center;line-height:0}
 .social a svg{display:block}
-.social{gap:24px}
+.social{gap:20px;flex-wrap:wrap}
