@@ -254,3 +254,154 @@ footer{border-top:.5px solid var(--border-soft);margin-top:20px;padding:26px 20p
 .social a{display:inline-flex;align-items:center;line-height:0}
 .social a svg{display:block}
 .social{gap:20px;flex-wrap:wrap}
+
+/* ==========================================================================
+   PREMIUM · CINEMATIC LAYER  (appended — overrides above)
+   ========================================================================== */
+
+/* Film grain + edge vignette across the whole page */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:140px 140px;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(130% 100% at 50% 28%,transparent 52%,rgba(0,0,0,.55) 100%);
+}
+header,.drawer,.search-overlay{position:sticky}
+header{z-index:50}
+
+/* ---- Hero: deeper cinematic glow + slow reveal ---- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:88px 20px 72px;
+  background:radial-gradient(120% 130% at 50% 12%,#4a1418 0%,#1c090b 52%,#0c0c0d 88%);
+}
+.hero::before{
+  content:"";position:absolute;left:50%;top:8%;width:min(760px,92%);height:340px;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(60% 60% at 50% 40%,rgba(229,9,20,.28),transparent 70%);
+  filter:blur(24px);animation:heroPulse 7s ease-in-out infinite;
+}
+@keyframes heroPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.hero h1{
+  position:relative;
+  font-size:clamp(34px,7vw,68px);line-height:1.06;letter-spacing:-.5px;
+  text-shadow:0 2px 40px rgba(0,0,0,.6);
+  animation:riseIn 1s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---- Section headings: refined, tracked, gold tick ---- */
+.sec-head{margin-bottom:16px;align-items:center}
+.sec-bar{width:3px;height:19px;background:linear-gradient(var(--red),#8f0610);box-shadow:0 0 12px rgba(229,9,20,.5)}
+.sec-title{
+  font-family:var(--head);font-weight:600;font-size:13px;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--text-2);
+}
+
+/* ---- Cards: gradient frame, glass sheen, cinematic hover ---- */
+.card{
+  background:linear-gradient(180deg,#151517,#0f0f11);
+  border:.5px solid var(--border);border-radius:14px;
+  box-shadow:0 1px 0 rgba(255,255,255,.03) inset;
+  transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s,border-color .28s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(229,9,20,.45);
+  box-shadow:0 18px 44px rgba(0,0,0,.6),0 0 0 1px rgba(229,9,20,.15),0 0 40px -12px rgba(229,9,20,.5);
+}
+.thumb{position:relative;overflow:hidden}
+.thumb::after{ /* top sheen */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 40%,rgba(0,0,0,.35));
+}
+
+/* ---- Polished "Coming soon" placeholder: intentional shimmer ---- */
+.thumb .soon{
+  position:relative;z-index:2;
+  font-family:var(--head);font-weight:600;font-size:10.5px;letter-spacing:3px;
+  color:rgba(255,255,255,.62);
+  padding:7px 14px;border:.5px solid rgba(255,255,255,.18);border-radius:100px;
+  background:rgba(0,0,0,.22);backdrop-filter:blur(2px);
+  text-transform:uppercase;
+}
+.thumb:has(.soon)::before{ /* slow light sweep */
+  content:"";position:absolute;top:0;left:-60%;width:55%;height:100%;z-index:1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.09),transparent);
+  transform:skewX(-18deg);animation:sweep 3.6s ease-in-out infinite;
+}
+@keyframes sweep{0%{left:-60%}55%,100%{left:130%}}
+.card h3{font-size:16px;line-height:1.32}
+.kicker{color:var(--gold);letter-spacing:1.4px}
+
+/* ---- Buttons / links: subtle premium motion ---- */
+.state-btn,.form .submit,.dc-mail,.chip{transition:all .2s cubic-bezier(.2,.7,.2,1)}
+.form .submit{box-shadow:0 8px 24px -10px rgba(229,9,20,.7)}
+.form .submit:hover{transform:translateY(-1px);opacity:1;box-shadow:0 12px 30px -8px rgba(229,9,20,.85)}
+
+/* ---- Brand mark: soft ring ---- */
+.brand img{box-shadow:0 0 0 1px rgba(255,255,255,.12),0 4px 14px rgba(0,0,0,.5)}
+.brand .name{text-shadow:0 0 22px rgba(229,9,20,.35)}
+
+/* ---- Nicer scrollbars on rows ---- */
+.row::-webkit-scrollbar{height:0}
+
+/* ---- Section rhythm ---- */
+.latest{padding-top:30px;padding-bottom:10px}
+
+@media(max-width:640px){
+  .hero{padding:60px 18px 46px}
+}
+
+
+/* ==========================================================================
+   PREMIUM v2 · SUBTLE RED/BLACK WASH (toned down)
+   ========================================================================== */
+
+/* Near-neutral dark tokens with only a faint warm lean */
+:root{
+  --bg:#0a0708;
+  --surface:#141012;
+  --surface-2:#110d0f;
+  --border:#221619;
+  --border-soft:#1a1114;
+}
+
+/* Fixed full-page gradient: faint red breath up top → black below. Subtle. */
+body{
+  background:
+    radial-gradient(140% 70% at 50% -10%, rgba(150,20,26,.22) 0%, rgba(60,12,15,.10) 32%, rgba(10,7,8,0) 58%),
+    linear-gradient(180deg, #100a0b 0%, #0c0809 34%, #0a0708 72%, #080506 100%);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+}
+
+/* Cards stay dark, only a whisper of warmth in the border */
+.card{
+  background:linear-gradient(180deg, rgba(26,16,18,.72), rgba(15,11,12,.72));
+  border-color:rgba(90,34,40,.22);
+}
+.card:hover{border-color:rgba(229,9,20,.45)}
+
+/* Hero glow gentler, blends into page */
+.hero{
+  background:
+    radial-gradient(110% 120% at 50% 6%, rgba(190,24,32,.26) 0%, rgba(80,14,18,.10) 42%, transparent 66%);
+}
+
+/* Header + drawer barely warm */
+header{background:rgba(13,9,10,.82)}
+.drawer-panel{background:#110d0f}
+
+/* Inputs / surfaces */
+.form input,.form textarea,.form select,
+.header-search input,.so-input,.searchbar input{background:rgba(19,13,14,.7)}
+.direct-contact{background:rgba(24,15,17,.5);border-color:rgba(90,34,40,.22)}
+.chip,.state-btn,.toggle .tg span{background:rgba(20,13,14,.6)}
+
+footer{background:linear-gradient(180deg,transparent,rgba(0,0,0,.4))}
+
