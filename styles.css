@@ -270,8 +270,7 @@ body::after{
   content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(130% 100% at 50% 28%,transparent 52%,rgba(0,0,0,.55) 100%);
 }
-header,.drawer,.search-overlay{position:sticky}
-header{z-index:50}
+header{position:sticky;top:0;z-index:50}
 
 /* ---- Hero: deeper cinematic glow + slow reveal ---- */
 .hero{
@@ -371,14 +370,15 @@ header{z-index:50}
   --border-soft:#1a1114;
 }
 
-/* Fixed full-page gradient: faint red breath up top → black below. Subtle. */
-body{
+/* Robust full-page wash: fixed layer behind everything (mobile-safe) */
+html{background:#080506}
+html::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(140% 70% at 50% -10%, rgba(150,20,26,.22) 0%, rgba(60,12,15,.10) 32%, rgba(10,7,8,0) 58%),
+    radial-gradient(140% 70% at 50% -6%, rgba(150,20,26,.22) 0%, rgba(60,12,15,.10) 32%, rgba(10,7,8,0) 58%),
     linear-gradient(180deg, #100a0b 0%, #0c0809 34%, #0a0708 72%, #080506 100%);
-  background-attachment:fixed;
-  background-repeat:no-repeat;
 }
+body{background:transparent}
 
 /* Cards stay dark, only a whisper of warmth in the border */
 .card{
@@ -405,3 +405,6 @@ header{background:rgba(13,9,10,.82)}
 
 footer{background:linear-gradient(180deg,transparent,rgba(0,0,0,.4))}
 
+
+/* Hero: three lines, all caps */
+.hero h1{text-transform:uppercase;letter-spacing:.5px;max-width:none;line-height:1.12}
