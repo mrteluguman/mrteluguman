@@ -21,8 +21,24 @@
 .tl-label{flex:1;text-align:center}
 .tl-sp{flex:0 0 30px}
 </style>
+<style>
+/* ===== Homepage background logo + seamless red/black wash ===== */
+.bg-logo{position:fixed;inset:0;z-index:0;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bg-logo img{width:min(82vmin,780px);opacity:.08}
+header,section,footer{position:relative;z-index:1}
+html{background:#070405}
+html::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(135% 72% at 50% -10%, rgba(150,22,28,.42) 0%, rgba(70,14,18,.16) 32%, rgba(10,7,8,0) 62%),
+   linear-gradient(180deg,#160a0c 0%,#0d0809 36%,#0a0708 72%,#070405 100%);}
+body{background:transparent}
+.hero{background:transparent;overflow:visible}
+.hero::before{display:none}
+body::after{display:none}
+</style>
 </head>
 <body>
+<div class="bg-logo"><img src="logo.jpg" alt=""></div>
 
 <header>
   <div class="wrap nav">
