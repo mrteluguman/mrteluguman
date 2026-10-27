@@ -29,19 +29,18 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  /* Horizontal drag on rows (mouse only; no pointer-capture so card links still work) */
+  /* Horizontal drag on rows (only starts dragging after real movement, so clicks on cards still open them) */
   document.querySelectorAll('.row').forEach(function(row){
     var down=false,startX,startScroll,moved;
     row.addEventListener('pointerdown',function(e){
       if(e.pointerType && e.pointerType!=='mouse') return;
       down=true; moved=false; startX=e.clientX; startScroll=row.scrollLeft;
-      row.classList.add('dragging');
     });
     window.addEventListener('pointermove',function(e){
       if(!down) return;
       var dx=e.clientX-startX;
-      if(Math.abs(dx)>4) moved=true;
-      row.scrollLeft=startScroll-dx;
+      if(Math.abs(dx)>4){ moved=true; row.classList.add('dragging'); }
+      if(moved) row.scrollLeft=startScroll-dx;
     });
     function end(){ down=false; row.classList.remove('dragging'); }
     window.addEventListener('pointerup',end);
@@ -51,19 +50,18 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  /* Vertical drag on state columns (desktop; no pointer-capture) */
+  /* Vertical drag on state columns (desktop; only starts after real movement) */
   document.querySelectorAll('.col .stack').forEach(function(stack){
     var down=false,startY,startScroll,moved;
     stack.addEventListener('pointerdown',function(e){
       if(e.pointerType && e.pointerType!=='mouse') return;
       down=true; moved=false; startY=e.clientY; startScroll=stack.scrollTop;
-      stack.classList.add('dragging');
     });
     window.addEventListener('pointermove',function(e){
       if(!down) return;
       var dy=e.clientY-startY;
-      if(Math.abs(dy)>4) moved=true;
-      stack.scrollTop=startScroll-dy;
+      if(Math.abs(dy)>4){ moved=true; stack.classList.add('dragging'); }
+      if(moved) stack.scrollTop=startScroll-dy;
     });
     function end(){ down=false; stack.classList.remove('dragging'); }
     window.addEventListener('pointerup',end);
