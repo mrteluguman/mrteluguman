@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var s=0;
     for(var i=0;i<terms.length;i++){
       var t=terms[i];
-      if(hay.indexOf(t)===-1) return -1;          // every word must match
+      if(hay.indexOf(t)===-1) return -1;
       if(title.indexOf(t)===0) s+=6;
       else if(title.indexOf(t)!==-1) s+=4;
       if(kw.indexOf(t)!==-1) s+=3;
@@ -147,14 +147,13 @@ document.addEventListener('DOMContentLoaded', function(){
       var sc=score(items[i],terms);
       if(sc>=0) out.push({it:items[i],s:sc});
     }
-    out.sort(function(a,b){ return b.s!==a.s ? b.s-a.s : byDateDesc(a.it,b.it); }); // relevance, then most recent
+    out.sort(function(a,b){ return b.s!==a.s ? b.s-a.s : byDateDesc(a.it,b.it); });
     return out.map(function(x){return x.it;});
   }
   function recent(n){ return (INDEX||[]).slice().sort(byDateDesc).slice(0,n||6); }
 
   var MAG='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7"></circle><line x1="20.5" y1="20.5" x2="15.6" y2="15.6"></line></svg>';
 
-  /* ---------- Header overlay ---------- */
   function buildOverlay(){
     var o=document.createElement('div');
     o.className='search-overlay'; o.id='searchOverlay';
@@ -220,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     }
 
-    /* ---------- Full results page (search.html) ---------- */
     var pageInput=document.getElementById('q');
     var pageOut=document.getElementById('searchResults');
     if(pageInput && pageOut){
